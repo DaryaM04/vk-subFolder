@@ -1,0 +1,14 @@
+  
+  .file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #b5e6b0;
+    border-radius: 10px;
+    width: 250px;
+    padding: 7px;
+    margin-top: 5px;
+    background-color: #ebf8e9;
+    margin-left: 25px;
+  }
+  
