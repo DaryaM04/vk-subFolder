@@ -1,42 +1,55 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button/Button";
 import FileStructure from "../FileStructure/FileStructure";
 
 import "../Folder/Folder.css";
+import ButtonFolder from "../ButtonFolder/ButtonFolder";
 
-export default function Folder({ name, value, path, onDelete }) {
+export default function Folder({ name, value, path, onClick, openFolders }) {
+  console.log(name);
+  //console.log(openFolders)
+  //console.log(Array.from(openFolders).some(item => item.includes('dir1')))
   const [isOpen, setIsOpen] = useState(false);
   const [hasFile, setHasFile] = useState(Object.keys(value).length > 0);
 
   useEffect(() => {
+    console.log(1);
     const isEmpty = Object.keys(value).length === 0;
     if (isEmpty) {
+      console.log(2);
       setIsOpen(false);
     }
+    console.log(3);
     setHasFile(!isEmpty);
-  }, [value]);
+    console.log(4);
+    if (Array.from(openFolders).some(item => item.includes(name))) {
+      console.log(5);
+      setIsOpen(true);
+    }
+  }, [openFolders, name]);
+
+  const handleFolderClick = () => {
+    setIsOpen(!isOpen); 
+    if (onClick) {
+      onClick(path);
+    }
+  };
 
   return (
     <>
-      <div className="folder_header">
-        <div
-          onClick={() => hasFile && setIsOpen(!isOpen)}
-          className={`folder__toggle {!hasFile ? "folder__toggle-disabled" : ""}`}
+      <div className="folder" onClick={handleFolderClick}>
+      {hasFile && (
+        <ButtonFolder
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? (
-            <div className="toggle-open">-</div>
-          ) : hasFile ? (
-            <div className="toggle-close">+</div>
-          ) : (
-            ""
-          )}
-        </div>
+          <div className="folder__icon">{isOpen ? '−' : '+'}</div>
+        </ButtonFolder>
+      )}
         <div className="folder__name">{name}</div>
       </div>
 
       {isOpen && (
-        <div className="folder__open-active">
-          <FileStructure structure={value} path={path} onDelete={onDelete} />
+        <div className="folder__open_active">
+          <FileStructure structure={value} path={path} onClick={onClick} />
         </div>
       )}
     </>

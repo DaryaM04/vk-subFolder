@@ -1,5 +1,4 @@
-
-.Button__add {
+.button__add {
     width: 100px;
     padding: 20px;
     border-radius: 5px;
@@ -11,7 +10,7 @@
     transition: 0.3s;
 }
 
-.Button__add:active {
+.button__add:active {
     transform: scale(0.95);
     background-color: rgba(0, 0, 0, 0.1)  !important;
-  }
+}

@@ -13,6 +13,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [newFile, setNewFile] = useState("");
   const [data, setData] = useState(initialData);
+  const [openFoldersState, setOpenFoldersState] = useState(new Set());
 
   const handleAddFile = () => {
     console.log(1);
@@ -41,13 +42,13 @@ export default function App() {
     });
   };
 
-  const { filteredData } = filterData(data, searchQuery);
-
+  const { filteredData, openFolders: filteredOpenFolders } = filterData(data, searchQuery, openFoldersState);
+  console.log(filteredOpenFolders);
   const isSearchEmpty = Object.keys(filteredData).length > 0;
 
 
   return (
-    <div className="App">
+    <div className="app">
       <div className="input__add">
         <Input
           placeholder="Введите название"
@@ -72,6 +73,7 @@ export default function App() {
          <Root
           structure={searchQuery ? filteredData : data}
           onDelete={handleDeleteFile}
+          openFolders={filteredOpenFolders}
         />
       ) : <p>Ничего не найдено</p>}
        
