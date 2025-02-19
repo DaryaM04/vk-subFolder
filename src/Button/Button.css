@@ -1,0 +1,16 @@
+.button__add {
+    width: 100px;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: rgb(35, 116, 197) !important;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.button__add:active {
+    transform: scale(0.95);
+    background-color: rgba(0, 0, 0, 0.1)  !important;
+}

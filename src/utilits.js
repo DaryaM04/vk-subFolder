@@ -10,15 +10,11 @@ export function filterData(data, query, openFolders = new Set()) {
         if (typeof obj[key] === "object") {
           const { filteredSubtree, hasMatch: childHasMatch } = filterRecursive(obj[key], newPath);
           if (childHasMatch) {
-            if (currentPath) openFolders.add(currentPath);
-            console.log(openFolders)
             result[key] = filteredSubtree;
             hasMatch = true;
           }
-        }  if (key.toLowerCase().includes(query.toLowerCase())) {
-            console.log(currentPath)
+        }  if (key.toLowerCase() === query.toLowerCase()) {
             if (currentPath) openFolders.add(currentPath);
-            console.log(openFolders)
             result[key] = obj[key];
             hasMatch = true;
         }
@@ -27,6 +23,5 @@ export function filterData(data, query, openFolders = new Set()) {
       return { filteredSubtree: result, hasMatch };
     };
     const { filteredSubtree } = filterRecursive(data, "");
-    const sortedOpenFolders = new Set([...openFolders].sort((a, b) => a.localeCompare(b)));
-    return { filteredData: filteredSubtree, sortedOpenFolders };
+    return { filteredData: filteredSubtree, openFolders };
 }

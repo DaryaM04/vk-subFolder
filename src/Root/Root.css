@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 20px;
+}
+  
+.root__name {
+  border: 1px solid #e8a8a8;
+  background-color: #f7d6d6;
+  border-radius: 10px;
+  padding: 7px;
+  width: 250px;
+  align-items: center;
+}

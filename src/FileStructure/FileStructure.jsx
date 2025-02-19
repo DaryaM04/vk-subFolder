@@ -3,11 +3,10 @@ import Folder from "../Folder/Folder";
 import File from "../File/File";
 import "../FileStructure/FileStructure.css";
 
-export default function FileStructure({ structure, path = "", onDelete }) {
-  const [openFoldersState, setOpenFoldersState] = useState(new Set());
-  console.log(openFoldersState);
-
-
+export default function FileStructure({ structure, path = "", onDelete, openFolders = new Set() }) {
+  console.log(openFolders); // приходит нужный 
+  const [openFoldersState, setOpenFoldersState] = useState(() => new Set(openFolders));
+  
   const sortedFileStructure = Object.entries(structure).sort(
     ([nameA, valueA], [nameB, valueB]) => {
       const isFolderA = typeof valueA === "object";
@@ -16,12 +15,24 @@ export default function FileStructure({ structure, path = "", onDelete }) {
     }
   );
 
+  const handleFolderToggle = (fullPathToItem) => {
+    setOpenFoldersState((prev) => {
+      const updatedFolders = new Set(prev);
+      if (updatedFolders.has(fullPathToItem)) {
+        updatedFolders.delete(fullPathToItem);  // Закрыть папку
+      } else {
+        updatedFolders.add(fullPathToItem);  // Открыть папку
+      }
+      console.log(updatedFolders);
+      return updatedFolders;
+    });
+  };
+
   return (
     <div style={{ paddingLeft: path ? 20 : 0 }}>
       {sortedFileStructure.map(([name, value]) => {
         const fullPathToItem = path ? `${path}/${name}` : name;
         const isFolder = typeof value === "object";
-        const isOpen = openFoldersState.has(fullPathToItem);
 
         return isFolder ? (
           <Folder
@@ -29,21 +40,10 @@ export default function FileStructure({ structure, path = "", onDelete }) {
             name={name}
             value={value}
             path={fullPathToItem}
-            isOpen={isOpen}
+            openFolders={openFolders}
             onClick = {() => {
-              setOpenFoldersState((prev) => {
-                console.log("New openFoldersState:", updatedFolders);
-                const updatedFolders = new Set(prev);
-                if (updatedFolders.has(fullPathToItem)) {
-                  updatedFolders.delete(fullPathToItem);
-                } else {
-                  updatedFolders.add(fullPathToItem);
-                }
-                console.log("New openFoldersState:", updatedFolders);
-                return updatedFolders;
-              });
+              handleFolderToggle(fullPathToItem)
             }}
-            onDelete={onDelete}
           />
         ) : (
           <File key={fullPathToItem} name={name} path={fullPathToItem} onDelete={onDelete} />

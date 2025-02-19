@@ -1,8 +1,8 @@
 import React from "react";
 
-import "../Button/Button.css";
+import "../ButtonFolder/ButtonFolder.css";
 
-export default function Button({
+export default function ButtonFolder({
   type = "submit",
   children,
   onClick,
@@ -10,7 +10,8 @@ export default function Button({
   style,
 }) {
   return (
-      <button className="button__add"
+    <div>
+      <button className="button__folder"
         type={type}
         onClick={onClick}
         value={value}
@@ -18,5 +19,6 @@ export default function Button({
       >
         {children}
       </button>
+    </div>
   );
 }

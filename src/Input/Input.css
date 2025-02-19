@@ -1,0 +1,14 @@
+.input {
+    background-color: #ebedf0;
+    text-align: start;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    min-width: 370px;
+    transition: 0.3s;
+}
+
+.input:focus {
+    color: black;
+}

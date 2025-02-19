@@ -4,8 +4,8 @@ import "../Input/Input.css"
 
 export default function InputSearch ({ type = "text", value, onChange, placeholder }){
     return (
-            <form className="Input">
-                <input className="Input__text"
+            <form >
+                <input className="input"
                     value={value}
                     type={type}
                     placeholder={placeholder}
