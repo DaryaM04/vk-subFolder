@@ -44,7 +44,7 @@ export default function Folder({ name, value, path, onClick, openFolders }) {
       </div>
 
       {isOpen && (
-        <div className="folder__open_active">
+        <div className="folder__content">
           <FileStructure structure={value} path={path} onClick={onClick} />
         </div>
       )}
