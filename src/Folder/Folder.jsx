@@ -6,21 +6,17 @@ import ButtonFolder from "../ButtonFolder/ButtonFolder";
 
 export default function Folder({ name, value, path, onClick, openFolders }) {
   console.log(name);
-  //console.log(openFolders)
-  //console.log(Array.from(openFolders).some(item => item.includes('dir1')))
+  console.log(openFolders)
+  console.log(Array.from(openFolders).some(item => item.includes('dir1')))
   const [isOpen, setIsOpen] = useState(false);
   const [hasFile, setHasFile] = useState(Object.keys(value).length > 0);
 
   useEffect(() => {
-    console.log(1);
     const isEmpty = Object.keys(value).length === 0;
     if (isEmpty) {
-      console.log(2);
       setIsOpen(false);
     }
-    console.log(3);
     setHasFile(!isEmpty);
-    console.log(4);
     if (Array.from(openFolders).some(item => item.includes(name))) {
       console.log(5);
       setIsOpen(true);
