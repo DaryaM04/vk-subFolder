@@ -4,7 +4,7 @@ import FileStructure from "../FileStructure/FileStructure";
 import ButtonFolder from "../ButtonFolder/ButtonFolder";
 import "../Root/Root.css";
 
-export default function Root({ structure, searchQuery, onDelete, openFolders }) {
+export default function Root({ structure, searchQuery, onDelete, openFoldersState, setOpenFoldersState  }) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -24,7 +24,8 @@ export default function Root({ structure, searchQuery, onDelete, openFolders }) 
             structure={structure}
             searchQuery={searchQuery}
             onDelete={onDelete}
-            openFolders={openFolders}
+            openFoldersState={openFoldersState}
+            setOpenFoldersState={setOpenFoldersState}
           />
         </div>
       )}

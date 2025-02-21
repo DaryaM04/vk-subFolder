@@ -4,10 +4,9 @@ import FileStructure from "../FileStructure/FileStructure";
 import "../Folder/Folder.css";
 import ButtonFolder from "../ButtonFolder/ButtonFolder";
 
-export default function Folder({ name, value, path, onClick, openFolders }) {
-  console.log(name);
-  console.log(openFolders)
-  console.log(Array.from(openFolders).some(item => item.includes('dir1')))
+export default function Folder({ name, value, path, onClick, openFoldersState, setOpenFoldersState }) {
+  console.log(path);
+  console.log("openFoldersState", openFoldersState); // обновленный openFoldersState от filterData 
   const [isOpen, setIsOpen] = useState(false);
   const [hasFile, setHasFile] = useState(Object.keys(value).length > 0);
 
@@ -17,25 +16,38 @@ export default function Folder({ name, value, path, onClick, openFolders }) {
       setIsOpen(false);
     }
     setHasFile(!isEmpty);
-    if (Array.from(openFolders).some(item => item.includes(name))) {
-      console.log(5);
-      setIsOpen(true);
-    }
-  }, [openFolders, name]);
+    console.log( typeof openFoldersState);
 
-  const handleFolderClick = () => {
-    setIsOpen(!isOpen); 
-    if (onClick) {
-      onClick(path);
-    }
+    // Проверка на открытие/закрытие папки в зависимости от состояния openFoldersState
+    if (openFoldersState && openFoldersState instanceof Set && openFoldersState.has(path)) {
+      setIsOpen(true);
+  } else {
+      setIsOpen(false);
+  }
+  }, [openFoldersState, path, value]);
+
+  const handleFolderToggle = (path) => {
+    setOpenFoldersState((prev) => {
+      const updatedFolders = new Set(prev);
+      if (updatedFolders.has(path)) {
+        updatedFolders.delete(path); 
+      } else {
+        updatedFolders.add(path); 
+      }
+      console.log("updatedFolders", updatedFolders)
+      return updatedFolders;
+    });
   };
 
   return (
     <>
-      <div className="folder" onClick={handleFolderClick}>
+      <div className="folder">
       {hasFile && (
         <ButtonFolder
-          onClick={() => setIsOpen(!isOpen)}
+          onClick = {() => {
+            handleFolderToggle(path);
+            setIsOpen((prev) => !prev);
+          }}
         >
           <div className="folder__icon">{isOpen ? '−' : '+'}</div>
         </ButtonFolder>
@@ -45,7 +57,7 @@ export default function Folder({ name, value, path, onClick, openFolders }) {
 
       {isOpen && (
         <div className="folder__content">
-          <FileStructure structure={value} path={path} onClick={onClick} />
+          <FileStructure structure={value} path={path} onClick={onClick} setOpenFoldersState={setOpenFoldersState} openFoldersState={openFoldersState}/>
         </div>
       )}
     </>

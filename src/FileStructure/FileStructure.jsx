@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Folder from "../Folder/Folder";
 import File from "../File/File";
 import "../FileStructure/FileStructure.css";
 
-export default function FileStructure({ structure, path = "", onDelete, openFolders = new Set() }) {
-  console.log(openFolders); // приходит нужный 
-  const [openFoldersState, setOpenFoldersState] = useState(() => new Set(openFolders));
+export default function FileStructure({ structure, path = "", onDelete, setOpenFoldersState, openFoldersState }) {
+  const [newPath, setNewPath] = useState(path);
   
   const sortedFileStructure = Object.entries(structure).sort(
     ([nameA, valueA], [nameB, valueB]) => {
@@ -15,23 +14,12 @@ export default function FileStructure({ structure, path = "", onDelete, openFold
     }
   );
 
-  const handleFolderToggle = (fullPathToItem) => {
-    setOpenFoldersState((prev) => {
-      const updatedFolders = new Set(prev);
-      if (updatedFolders.has(fullPathToItem)) {
-        updatedFolders.delete(fullPathToItem);  // Закрыть папку
-      } else {
-        updatedFolders.add(fullPathToItem);  // Открыть папку
-      }
-      console.log(updatedFolders);
-      return updatedFolders;
-    });
-  };
-
   return (
-    <div style={{ paddingLeft: path ? 20 : 0 }}>
+    <div style={{ paddingLeft: newPath ? 20 : 0 }}>
       {sortedFileStructure.map(([name, value]) => {
-        const fullPathToItem = path ? `${path}/${name}` : name;
+        const fullPathToItem = newPath 
+        ? `${newPath}/${name}` 
+        : name;
         const isFolder = typeof value === "object";
 
         return isFolder ? (
@@ -40,10 +28,8 @@ export default function FileStructure({ structure, path = "", onDelete, openFold
             name={name}
             value={value}
             path={fullPathToItem}
-            openFolders={openFolders}
-            onClick = {() => {
-              handleFolderToggle(fullPathToItem)
-            }}
+            openFoldersState={openFoldersState} // передаем openFolders
+            setOpenFoldersState={setOpenFoldersState} // передаем setOpenFoldersState
           />
         ) : (
           <File key={fullPathToItem} name={name} path={fullPathToItem} onDelete={onDelete} />

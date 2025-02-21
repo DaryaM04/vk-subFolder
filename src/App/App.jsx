@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { data as initialData } from "../data.js";
 import Root from "../Root/Root.jsx";
@@ -13,10 +13,12 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [newFile, setNewFile] = useState("");
   const [data, setData] = useState(initialData);
-  const [openFoldersState, setOpenFoldersState] = useState(new Set());
+
+  const [filteredData, setFilteredData] = useState(data); 
+  const [openFoldersState, setOpenFoldersState] = useState(new Set()); 
+
 
   const handleAddFile = () => {
-    console.log(1);
     if (!newFile.trim()) return;
 
     setData((prevData) => ({
@@ -31,6 +33,7 @@ export default function App() {
       const updatedData = structuredClone(prevData);
       const pathParts = fullPath.split("/");
 
+
       let current = updatedData;
       for (let i = 0; i < pathParts.length - 1; i++) {
         current = current[pathParts[i]];
@@ -42,9 +45,14 @@ export default function App() {
     });
   };
 
-  const { filteredData, openFolders: filteredOpenFolders } = filterData(data, searchQuery, openFoldersState);
-  console.log(filteredOpenFolders);
-  const isSearchEmpty = Object.keys(filteredData).length > 0;
+  useEffect(() => {
+    const { filteredData, reversedOpenFolders } = filterData(data, searchQuery);
+    setFilteredData(filteredData); 
+    setOpenFoldersState(reversedOpenFolders); 
+    console.log("openFolders", reversedOpenFolders);
+  }, [searchQuery, data]); 
+
+  const isSearchEmpty = Object.keys(data).length > 0;
 
 
   return (
@@ -73,7 +81,8 @@ export default function App() {
          <Root
           structure={searchQuery ? filteredData : data}
           onDelete={handleDeleteFile}
-          openFolders={filteredOpenFolders}
+          openFoldersState={openFoldersState}
+          setOpenFoldersState={setOpenFoldersState}
         />
       ) : <p>Ничего не найдено</p>}
        
