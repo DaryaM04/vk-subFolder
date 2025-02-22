@@ -16,6 +16,8 @@
   border-radius: 10px;
   width: 250px;
   padding: 7px;
+
+  font-size: 14px;
 }
 
 .folder__content {

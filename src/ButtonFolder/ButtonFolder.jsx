@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../ButtonFolder/ButtonFolder.css";
+import "./ButtonFolder.css";
 
 export default function ButtonFolder({
   type = "submit",

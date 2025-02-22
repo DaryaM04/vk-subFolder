@@ -4,6 +4,11 @@
   align-items: center;
   margin-top: 20px;
 }
+
+.folder__icon{
+  font-size: 16px;
+  font-weight: 100;
+}
   
 .root__name {
   border: 1px solid #e8a8a8;
@@ -12,4 +17,6 @@
   padding: 7px;
   width: 250px;
   align-items: center;
+
+  font-size: 14px;
 }

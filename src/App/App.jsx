@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import { data as initialData } from "../data.js";
+
 import Root from "../Root/Root.jsx";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
-
 import { filterData } from "../utilits.js";
 
 import "./App.css";
@@ -13,7 +12,6 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [newFile, setNewFile] = useState("");
   const [data, setData] = useState(initialData);
-
   const [filteredData, setFilteredData] = useState(data); 
   const [openFoldersState, setOpenFoldersState] = useState(new Set()); 
 
@@ -29,16 +27,15 @@ export default function App() {
   };
 
   const handleDeleteFile = (fullPath) => {
+
     setData((prevData) => {
       const updatedData = structuredClone(prevData);
       const pathParts = fullPath.split("/");
-
-
       let current = updatedData;
+
       for (let i = 0; i < pathParts.length - 1; i++) {
         current = current[pathParts[i]];
       }
-
       delete current[pathParts[pathParts.length - 1]];
 
       return updatedData;
@@ -49,8 +46,7 @@ export default function App() {
     const { filteredData, reversedOpenFolders } = filterData(data, searchQuery);
     setFilteredData(filteredData); 
     setOpenFoldersState(reversedOpenFolders); 
-    console.log("openFolders", reversedOpenFolders);
-  }, [searchQuery, data]); 
+  }, [searchQuery]); 
 
   const isSearchEmpty = Object.keys(data).length > 0;
 
@@ -60,7 +56,6 @@ export default function App() {
       <div className="input__add">
         <Input
           placeholder="Введите название"
-          type="search"
           value={newFile}
           onChange={(e) => setNewFile(e.target.value)}
         />

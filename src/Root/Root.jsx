@@ -4,16 +4,23 @@ import FileStructure from "../FileStructure/FileStructure";
 import ButtonFolder from "../ButtonFolder/ButtonFolder";
 import "../Root/Root.css";
 
-export default function Root({ structure, searchQuery, onDelete, openFoldersState, setOpenFoldersState  }) {
+export default function Root({ 
+  structure, 
+  searchQuery, 
+  onDelete, 
+  openFoldersState, 
+  setOpenFoldersState  
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>
       <div className="root">
-        <ButtonFolder
+        <ButtonFolder 
+          className = "button__folder"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div className="folder__icon">{isOpen ? "-" : "+"}</div>
+          <div className="folder__icon">{isOpen ? '−' : '+'}</div>
         </ButtonFolder>
         <div className="root__name">{"root"}</div>
       </div>

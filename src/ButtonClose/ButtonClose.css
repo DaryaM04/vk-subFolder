@@ -1,15 +1,22 @@
-.Button__close {
-    border-radius: 100px;
-    background-color: #ebedf0;
-    padding: 3px;
-    border: none;
-    width: 20px;
-    height: 20px;
+.button__close {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 20px; 
+    height: 20px;
+    border-radius: 50%; 
+    background-color: rgba(145, 140, 140, 0.7);
+    padding: 0;
+    border: none; 
+    cursor: pointer; 
+    opacity: 1;
+
+    font-size: 18px;
+    color: #ebf8e9;
+
+    transition: 0.3s;
 }
 
-.Button__close:hover {
-    background-color: rgba(206, 185, 185, 0.372);
+.button__close:hover {
+    background-color: rgba(0, 0, 0, 0.2);
 }
