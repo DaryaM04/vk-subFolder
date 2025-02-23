@@ -17,7 +17,7 @@ export default function Root({
     <>
       <div className="root">
         <ButtonFolder 
-          className = "button__folder"
+          className="button__folder"
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="folder__icon">{isOpen ? '−' : '+'}</div>
@@ -26,7 +26,7 @@ export default function Root({
       </div>
 
       {isOpen && (
-        <div className="folder__open_active">
+        <div className="folder__content">
           <FileStructure
             structure={structure}
             searchQuery={searchQuery}

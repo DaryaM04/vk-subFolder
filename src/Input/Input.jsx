@@ -2,17 +2,15 @@ import React from "react";
 
 import "../Input/Input.css"
 
-export default function Input ({ type = "text", value, onChange, placeholder }){
+export default function Input ({ type="text", value, onChange, placeholder, className }){
     return (
-            <form role="search">
-                <input 
-                    className="input"
-                    value={value}
-                    type={type}
-                    placeholder={placeholder}
-                    onChange={onChange}
-                />
-            </form>
+        <input 
+            className={`input ${className}`}
+            value={value}
+            type={type}
+            placeholder={placeholder}
+            onChange={onChange}
+        />
     )
 };
 

@@ -10,7 +10,7 @@
 .input__add {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
@@ -18,14 +18,8 @@
   margin-bottom: 10px;
 }
 
-.input {
-  background-color: #ebedf0;
-  color: red;
-  padding: 10px;
+.search-icon {
+  position: relative;
+  color: #696b6c;
+  top: 50%;
 }
-
-.Button__add {
-  background-color: blue;
-  padding: 10px;
-}
-  

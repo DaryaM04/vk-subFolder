@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { data as initialData } from "../data.js";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';  // импортируем иконку поиска
+
 import Root from "../Root/Root.jsx";
 import Input from "../Input/Input.jsx";
 import Button from "../Button/Button.jsx";
@@ -53,7 +56,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <div className="input__add">
+      <form className="input__add">
         <Input
           placeholder="Введите название"
           value={newFile}
@@ -63,14 +66,17 @@ export default function App() {
         <Button onClick={handleAddFile}>
           Создать
         </Button>
-      </div>
-      <search role="search" className="search">
-        <Input
-          placeholder="Поиск"
-          type="search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+      </form>
+      <search role="search">
+        <form className="input__search">
+          <Input
+            placeholder="Поиск"
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="input__search-text"
+          />
+        </form>
       </search>
       {isSearchEmpty ? (
          <Root
