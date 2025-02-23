@@ -1,0 +1,22 @@
+.button__folder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebedf0;
+    border-radius: 5px;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+  
+    color: rgb(63, 127, 236);
+    font-size: 22px;
+    font-weight: 300;
+    transition: 0.5s;
+}
+
+.button__folder:hover {
+    background-color: #7da3dc;
+    color: white;
+ }

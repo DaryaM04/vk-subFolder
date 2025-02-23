@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../ButtonClose/ButtonClose.css";
+import "./ButtonClose.css";
 
 export default function ButtonClose({
   type = "submit",
@@ -10,8 +10,8 @@ export default function ButtonClose({
   style,
 }) {
   return (
-    <div>
-      <button className="Button__close"
+    <>
+      <button className="button__close"
         type={type}
         onClick={onClick}
         value={value}
@@ -19,6 +19,6 @@ export default function ButtonClose({
       >
         {children}
       </button>
-    </div>
+    </>
   );
 }

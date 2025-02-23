@@ -1,0 +1,22 @@
+.button__add {
+    width: 100px;
+    height: 20px;
+    padding: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background: rgb(55, 135, 215);
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+
+    font-size: 16px;
+}
+
+.button__add:active {
+    transform: scale(0.95);
+    background: rgba(0, 0, 0, 0.1);
+}
